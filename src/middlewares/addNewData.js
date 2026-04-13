@@ -2,7 +2,7 @@ const addNew = (req, res) => {
   try {
     throw new Error("Ask for support team help...");
   } catch (err) {
-    res.status(403).send("Call to the support team...!!!");
+    res.status(501).send("You can't play with this...");
   }
 };
 

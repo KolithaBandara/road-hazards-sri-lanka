@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const { addNew, addNewData } = require("./middlewares/addNewData");
+const { getUserData } = require("./middlewares/getData");
 
 // Main Middleware
 app.use("/", (req, res, next) => {
@@ -11,13 +12,13 @@ app.use("/", (req, res, next) => {
   next();
 });
 
-// ALL methods, /data Middleware
-app.use("/data", addNew, (req, res, next) => {
-  console.log("=== DATA Middleware ===");
-  next();
-});
+// GET /data Route Handler
+app.get("/data", getUserData);
 
 // POST /data/new/hazard Route Handler
 app.post("/data/new/hazard", addNewData);
+
+// ALL methods, /data Route Handler
+app.use("/data", addNew);
 
 app.listen(9859, console.log("Server running on PORT:9859"));
