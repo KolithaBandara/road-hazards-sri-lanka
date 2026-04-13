@@ -28,9 +28,8 @@ Keep it under 50 characters.
 
 Use the imperative mood. (Write "add route" instead of "added route" or "adding route". Imagine the sentence starts with "If applied, this commit will...").
 
-Do not capitalize the first letter.
-
-Do not put a period at the end.
+**Do not capitalize the first letter,**
+**Do not put a period at the end.**
 
 Your Project Roadmap in Commits
 If we were to track your progress over the next few hours of building the core Express architecture, your Git history should look beautifully structured like this:
