@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const { addNewData } = require("./middlewares/addNewData");
+
 // Main Middleware
 app.use("/", (req, res, next) => {
   console.log(
@@ -15,28 +17,7 @@ app.use("/data", (req, res, next) => {
   next();
 });
 
-// ALL methods, /data/new Middleware
-app.use("/data/new", (req, res, next) => {
-  console.log("=== DATA/NEW Middleware ===");
-  next();
-});
-
-// POST /data/new Route Handler
-app.post("/data/new", (req, res, next) => {
-  console.log("POST method, /data/new Middleware");
-  res.send("Add a new data");
-});
-
-// ALL methods /data/new/hazard Middleware
-app.use("/data/new/hazard", (req, res, next) => {
-  console.log("=== DATA/NEW/HAZARDS Middleware ===");
-  next();
-});
-
-// POST /data/new/hazards Route Handler
-app.post("/data/new/hazard", (req, res, next) => {
-  console.log("POST data/new/hazard, Route Handler");
-  res.send("New data added...!");
-});
+// POST /data/new/hazard Route Handler
+app.post("/data/new/hazard", addNewData);
 
 app.listen(9859, console.log("Server running on PORT:9859"));
