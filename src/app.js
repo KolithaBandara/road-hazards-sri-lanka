@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const { addNewData } = require("./middlewares/addNewData");
+const { addNew, addNewData } = require("./middlewares/addNewData");
 
 // Main Middleware
 app.use("/", (req, res, next) => {
@@ -12,7 +12,7 @@ app.use("/", (req, res, next) => {
 });
 
 // ALL methods, /data Middleware
-app.use("/data", (req, res, next) => {
+app.use("/data", addNew, (req, res, next) => {
   console.log("=== DATA Middleware ===");
   next();
 });
