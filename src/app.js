@@ -65,4 +65,20 @@ app.get("/user/age", async (req, res) => {
   }
 });
 
+// GET users/ by firstName
+app.get("/user/firstName", async (req, res) => {
+  try {
+    const userData = await User.find(req.body);
+    if (userData.length === 0) {
+      res.status(404).send("NO USERS! 💔");
+    } else if (userData.length === 1) {
+      res.status(200).send(`USER FOUND 😘 : ${userData}`);
+    } else {
+      res.status(200).send(`${userData.length} USERS, FOUND 😍 : ${userData}`);
+    }
+  } catch (err) {
+    console.log(`ERROR: ${err.message} ===> ${err}`);
+  }
+});
+
 // app.listen(9859, console.log("Server running on PORT:9859"));
