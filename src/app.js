@@ -51,6 +51,25 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// GET users/all
+app.get("/users/all", async (req, res) => {
+  try {
+    const userData = await User.find(req.body);
+    if (userData.length === 0) {
+      res.status(400).send("NO USER DATA! 😟");
+    } else {
+      res
+        .status(200)
+        .send(`${userData.length} USERS ARE THERE! 😇: ${userData}`);
+    }
+  } catch (err) {
+    console.log(`ERROR : ${err.message}, ${err}`);
+    res
+      .status(400)
+      .send("SOMETHING WENT WRONG!🥲 PLEASE CONTACT THE SUPPORT TEAM💔");
+  }
+});
+
 // GET user/ by age
 app.get("/user/age", async (req, res) => {
   try {
