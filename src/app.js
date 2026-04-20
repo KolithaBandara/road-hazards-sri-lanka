@@ -51,4 +51,18 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// GET user/ by age
+app.get("/user/age", async (req, res) => {
+  try {
+    const userData = await User.findOne(req.body);
+    if (userData.age === req.body.age) {
+      res.status(200).send(`USER FOUND! 😊, ${userData}`);
+    } else {
+      res.status(404).send("NO USER 🥲");
+    }
+  } catch (err) {
+    console.log(`Error : ${err.message} ===> ${err}`);
+  }
+});
+
 // app.listen(9859, console.log("Server running on PORT:9859"));
