@@ -81,4 +81,21 @@ app.get("/user/firstName", async (req, res) => {
   }
 });
 
+// DELETE user/ by id
+app.delete("/user/delete/id", async (req, res) => {
+  try {
+    const userData = await User.findByIdAndDelete(req.body);
+    if (!userData) {
+      res
+        .status(400)
+        .send("THERE IS NO USER LIKE THAT! 😳 PLEASE RE-CHECK THE USERID");
+    } else {
+      res.status(200).send("USER DELETED SUCCESSFULLY! 🗑️✅");
+    }
+  } catch (err) {
+    console.log(`ERROR : ${err.message} ===> ${err}`);
+    res.status(400).send("BAD REQUEST!😟 Connect the support team");
+  }
+});
+
 // app.listen(9859, console.log("Server running on PORT:9859"));
