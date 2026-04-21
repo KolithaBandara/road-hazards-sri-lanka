@@ -71,6 +71,28 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// GET user/login
+app.get("/login", async (req, res) => {
+  try {
+    const { _id, email, password } = req.body;
+    console.log(`EMAIL:${email}, PASSWORD:${password}`);
+
+    const userData = await User.findById(_id);
+    console.log(`USER FOUND: ${userData.firstName}, EMAIL: ${userData.email}`);
+
+    const isTrue = await bcrypt.compare(password, userData.password);
+
+    if (!isTrue) {
+      throw new Error("CREDENTIALS AREN'T MATCHED! ❌ PLEASE TRY AGAIN!");
+    }
+
+    res.send(`HI, ${userData.firstName}! YOU'RE WELCOME TO THE ACCOUNT! 🩷`);
+  } catch (err) {
+    res.status(400).send(err.message);
+    console.log(`GOT ERROR🚫: ${err.message} ==> ${err}`);
+  }
+});
+
 // GET users/all
 app.get("/users/all", async (req, res) => {
   try {
