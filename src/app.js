@@ -46,7 +46,7 @@ app.post("/signup", async (req, res) => {
     await user.save();
     res.send("USER ADDED SUCCESSFULLY! 😃");
   } catch (err) {
-    res.status(400).send("Can't access to the DATABASE ☹️");
+    res.status(400).send(`Can't access to the DATABASE ☹️, ${err.message}`);
     console.log(`Got an ERROR : ${err.message} ==> ${err}`);
   }
 });
