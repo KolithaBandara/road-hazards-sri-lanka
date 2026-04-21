@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/database");
+const { signupValidation } = require("./utils/validation");
 const app = express();
 
 const { addNew, addNewData } = require("./middlewares/addNewData");
@@ -41,6 +42,9 @@ const User = require("./models/users");
 // POST user/signup
 app.post("/signup", async (req, res) => {
   try {
+    // Validate the data
+    signupValidation(req);
+
     // Create a new User MODEL instance
     const user = new User(req.body);
     await user.save();
