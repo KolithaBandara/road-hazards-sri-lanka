@@ -2,7 +2,14 @@ const express = require("express");
 const connectDB = require("./config/database");
 const { signupValidation } = require("./utils/validation");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const app = express();
+
+require("dotenv").config();
+
+// Import TOKEN secret key from the .env
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const { addNew, addNewData } = require("./middlewares/addNewData");
 const { getUserData } = require("./middlewares/getData");
@@ -19,6 +26,9 @@ connectDB()
 
 // JSON Object to JavaScript Object convertor
 app.use(express.json());
+
+// Cookie-Parser
+app.use(cookieParser());
 
 // Main Middleware
 app.use("/", (req, res, next) => {
@@ -86,7 +96,19 @@ app.post("/login", async (req, res) => {
       throw new Error("CREDENTIALS AREN'T MATCHED! ❌ PLEASE TRY AGAIN!");
     }
 
-    res.send(`HI, ${userData.firstName}! YOU'RE WELCOME TO THE ACCOUNT! 🩷`);
+    // Create a JWT token
+    const payload = { id: _id, role: userData.firstName };
+    const secretKey = `${SECRET_KEY}`; //Keep this secure with the server!
+    const options = { expiresIn: "1h" };
+
+    const token = jwt.sign(payload, secretKey, options);
+    console.log(`TOKEN CREATED SUCCESSFULLY!✅ TOKEN : ${token}`);
+
+    // Add token to cookie and send the response back to the user
+
+    res.send(
+      `HI, ${userData.firstName}! YOU'RE SUCCESSFULLY LOGGED IN TO THE ACCOUNT! 🩷`,
+    );
   } catch (err) {
     res.status(400).send(err.message);
     console.log(`GOT ERROR🚫: ${err.message} ==> ${err}`);
