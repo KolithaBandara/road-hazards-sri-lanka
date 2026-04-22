@@ -105,6 +105,7 @@ app.post("/login", async (req, res) => {
     console.log(`TOKEN CREATED SUCCESSFULLY!✅ TOKEN : ${token}`);
 
     // Add token to cookie and send the response back to the user
+    res.cookie("TOKEN", token);
 
     res.send(
       `HI, ${userData.firstName}! YOU'RE SUCCESSFULLY LOGGED IN TO THE ACCOUNT! 🩷`,
