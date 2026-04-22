@@ -180,5 +180,3 @@ app.delete("/user/delete/id", async (req, res) => {
     res.status(400).send("BAD REQUEST!😟 Connect the support team");
   }
 });
-
-// app.listen(9859, console.log("Server running on PORT:9859"));
