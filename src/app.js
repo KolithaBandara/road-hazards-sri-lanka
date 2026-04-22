@@ -116,6 +116,19 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// GET /profile
+app.get("/profile", (req, res) => {
+  try {
+    const { TOKEN } = req.cookies;
+    console.log(`JWT TOKEN:${TOKEN}`);
+
+    res.send("TOKEN SENT SUCCESSFULLY!✅");
+  } catch (err) {
+    res.status(400).send(err.message);
+    console.log(`GOT ERROR🚫: ${err.message} ==> ${err}`);
+  }
+});
+
 // GET users/all
 app.get("/users/all", async (req, res) => {
   try {
