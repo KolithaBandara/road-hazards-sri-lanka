@@ -1,0 +1,26 @@
+{
+  "name": "road-hazards",
+  "version": "2.0.0",
+  "description": "",
+  "keywords": [
+    "javascript",
+    "node.js",
+    "express.js",
+    "mongodb"
+  ],
+  "homepage": "https://github.com/KolithaBandara/road-hazards-sri-lanka#readme",
+  "bugs": {
+    "url": "https://github.com/KolithaBandara/road-hazards-sri-lanka/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KolithaBandara/road-hazards-sri-lanka.git"
+  },
+  "license": "ISC",
+  "author": "Kolitha Bandara",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
